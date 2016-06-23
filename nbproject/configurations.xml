@@ -11,6 +11,7 @@
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
         <itemPath>mcc_generated_files/tmr1.h</itemPath>
       </logicalFolder>
+      <itemPath>UserApp/ECAN.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
       <logicalFolder name="mcc_generated_files"
@@ -21,6 +22,9 @@
         <itemPath>mcc_generated_files/eusart1.c</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
         <itemPath>mcc_generated_files/tmr1.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="UserApp" projectFiles="true">
+        <itemPath>UserApp/ECAN.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -33,6 +37,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>mcc_generated_files</Elem>
+    <Elem>UserApp</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -138,6 +143,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

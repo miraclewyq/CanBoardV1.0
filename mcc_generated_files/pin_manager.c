@@ -53,7 +53,7 @@ void PIN_MANAGER_Initialize(void) {
     //ANSELA = 0x2F;
 
     LATB = 0x00;
-    TRISB = 0xFE;
+    TRISB = 0xFE;//1111 1110
     //ANSELB = 0x3E;
     WPUB = 0x00;
 

@@ -20746,7 +20746,16 @@ void SYSTEM_Initialize(void);
 # 83
 void OSCILLATOR_Initialize(void);
 
-# 49 "main.c"
+# 77 "UserApp/ECAN.h"
+void InitECAN(void);
+
+unsigned char ECAN_Receive(void);
+
+void ECAN_Transmit(void);
+
+# 50 "main.c"
+uint16_t PM25 = 0;
+
 void delay(uint16_t x)
 {
 uint16_t a,b;
@@ -20754,18 +20763,33 @@ for(a=x;a>0;a--)
 for(b=110;b>0;b--);
 }
 
-# 59
+# 63
+unsigned char FucCheckSum(unsigned char *i,unsigned char ln)
+{
+unsigned char j,tempq=0;
+i+=1;
+for(j=0;j<(ln-2);j++)
+{
+tempq+=*i;
+i++;
+}
+tempq=(~tempq)+1;
+return(tempq);
+}
+
+# 79
 void main(void) {
 
 SYSTEM_Initialize();
+InitECAN();
 
-# 80
+# 100
 (INTCONbits.GIE = 1);
 
 
 (INTCONbits.PEIE = 1);
 
-# 91
+# 111
 while (1) {
 
 if(USART1_RX_STA&0X8000)
@@ -20777,6 +20801,26 @@ PORTCbits.RC2 = 1;
 delay(200);
 PORTCbits.RC3 = 0;
 PORTCbits.RC2 = 0;
+
+if(USART1_RX_BUF[0] == 0x42)
+{
+uint16_t CheckSum = 0x00;
+uint16_t temp;
+for(unsigned char i=0;i<22;i++)
+{
+CheckSum += USART1_RX_BUF[i];
+}
+temp = (uint16_t)USART1_RX_BUF[22]<<8 + USART1_RX_BUF[23];
+if(CheckSum == temp)
+{
+PM25 = (uint16_t)USART1_RX_BUF[12]<<8 + USART1_RX_BUF[13];
+}
+}
+}
+
+if(ECAN_Receive())
+{
+ECAN_Transmit();
 }
 }
 }

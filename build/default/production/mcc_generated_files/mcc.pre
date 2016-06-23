@@ -20819,7 +20819,7 @@ TMR1_Initialize();
 
 void OSCILLATOR_Initialize(void) {
 
-OSCCON = 0x72;
+OSCCON = 0x7C;
 
 OSCCON2 = 0x04;
 
